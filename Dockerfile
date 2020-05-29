@@ -2,23 +2,18 @@ FROM ubuntu:eoan
 
 LABEL maintainer="treewords <gheonea.iulian@gmail.com>"
 
-ENV BOT_USER_USER="2000" \
-    BOT_GROUP="2000" \
-    BOT_DIR="/musicbot" \
-    BOT_DL_URL="https://www.22hosting.net/download/docker-files/JMusicBot-0.2.8.tar.gz"
-	
-ENV BOT_PLAYLISTS="$BOT_DIR/Playlists" \
-    BOT_CONFIG="$BOT_DIR/config.txt"
-	
 RUN apt-get -y update \
-    && apt-get -y install apt-utils \
-    openjdk-14-jdk \
-	mkdir -p "$BOT_DIR" && \
-	curl -sqL "$BOT_DL_URL" | tar zxvf -
+    && apt-get -y install openjdk-14-jdk \
+    git
+	
+RUN git clone https://github.com/treewords/docker-discord-musicbot.git 
 
-USER musicbot
-WORKDIR "$BOT_DIR"
 
-VOLUME ["$BOT_PLAYLISTS", "$BOT_CONFIG"]
+VOLUME ["/root/docker-discord-musicbot"]
 
-CMD /nohup java -Dnogui=true -jar JMusicBot-0.2.8.jar &
+
+WORKDIR /root/docker-discord-musicbot
+
+ADD start.sh /start.sh
+RUN chmod 0755 /start.sh
+CMD ["bash", "/start.sh"]
