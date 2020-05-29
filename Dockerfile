@@ -6,7 +6,7 @@ RUN apt-get -y update \
     && apt-get -y install openjdk-14-jdk \
     git
 	
-RUN git clone https://github.com/treewords/docker-discord-musicbot.git 
+RUN git clone https://github.com/treewords/docker-discord-musicbot.git /root/docker-discord-musicbot
 
 
 VOLUME ["/root/docker-discord-musicbot"]
