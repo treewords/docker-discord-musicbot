@@ -17,4 +17,4 @@ RUN git clone "$BOT_DL_URL" "$BOT_DIR"
 
 
 WORKDIR "$BOT_DIR"
-ENTRYPOINT ["java", "-jar", "JMusicBot-0.2.8.jar"]
+ENTRYPOINT ["java", "-jar", "JMusicBot-0.2.9.jar"]
